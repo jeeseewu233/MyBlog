@@ -1,0 +1,189 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>五先生笔记</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static "blog/css/base.css" %}" rel="stylesheet">
+    <link href="{% static "blog/css/index.css" %}" rel="stylesheet">
+    <link href="{% static "blog/css/m.css" %}" rel="stylesheet">
+    <!--[if lt IE 9]>
+<script src="{% static "blog/js/modernizr.js" %}"></script>
+<![endif]-->
+    <script src="{% static "blog/js/page.js" %}"></script>
+</head>
+<body>
+<header>
+    <div id="mnav">
+        <div class="logo"><a href="/">五先生笔记</a></div>
+        <h2 id="mnavh"><span class="navicon"></span></h2>
+        <ul id="starlist">
+            <li><a href="http://localhost:8000/">首页</a></li>
+            <li><a href="{% url "blog:category" 6 %}">PM之路</a></li>
+            <li><a href="{% url "blog:category" 7 %}">Python啦</a></li>
+            <li><a href="{% url "blog:category" 8 %}">数据分析</a></li>
+            <li><a href="{% url "blog:category" 9 %}">技术杂烩</a></li>
+            <li><a href="{% url "blog:category" 9 %}">七七八八</a></li>
+        </ul>
+    </div>
+    <script>
+        window.onload = function () {
+            var oH2 = document.getElementById("mnavh");
+            var oUl = document.getElementById("starlist");
+            oH2.onclick = function () {
+                var style = oUl.style;
+                style.display = style.display == "block" ? "none" : "block";
+                oH2.className = style.display == "block" ? "open" : ""
+            }
+        }
+    </script>
+</header>
+<div class="line46"></div>
+<article>
+    <div class="pics">
+        {% if top_post_list %}
+            <ul>
+                {% for top_post in top_post_list %}
+                    <li><i><a href="{{ top_post.target }}"><img
+                            src="../../../media/{{ top_post.imgUrl }}"></a></i><span>{{ top_post.title }}</span></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+    <div class="blank"></div>
+    <div class="leftbox">
+        {#        <div class="tuijian">#}
+        {#            <h2 class="hometitle"><span><a href="/">模板分享</a><a href="/">学无止境</a><a href="/">慢生活</a><a href="/">热门标签</a></span>特别推荐#}
+        {#            </h2>#}
+        {#            <ul>#}
+        {#                <li>#}
+        {#                    <div class="tpic"><img src="images/b01.png"></div>#}
+        {#                    <b>6条网页设计配色原则,让你秒变配色高手</b><span>网页设计好不好看,颜色是毋庸置疑要排首位的,所以关于颜色的搭配技巧以及原则,对于每一个要学习web前端设计的新手来说,这都是一个重要的学习过程.在本教程中我们将与你分享...</span><a#}
+        {#                        href="/" class="readmore">阅读原文</a></li>#}
+        {#                <li>#}
+        {#                    <div class="tpic"><img src="images/b02.jpg"></div>#}
+        {#                    <b>作为一个设计师,如果遭到质疑你是否能恪守自己的原则</b><span>就拿我自己来说吧，有时候会很矛盾，设计好的作品，不把它分享出来，会觉得待在自己电脑里面实在是没有意义...</span><a#}
+        {#                        href="/" class="readmore">阅读原文</a></li>#}
+        {#                <li>#}
+        {#                    <div class="tpic"><img src="images/b03.jpg"></div>#}
+        {#                    <b>愿有人陪你一起颠沛流离</b><span>有一天晚上我收到朋友的邮件，他问我怎样可以最快地摆脱寂寞，我想了想不知道应该怎么回答他，因为我从来没有摆脱过这个问题，我只能去习惯它，就像习惯身体的一部分...</span><a#}
+        {#                        href="/" class="readmore">阅读原文</a></li>#}
+        {#                <li>#}
+        {#                    <div class="tpic"><img src="images/b04.jpg"></div>#}
+        {#                    <b>你要去相信，没有到不了的明天</b><span>不管你现在是一个人走在异乡的街道上始终没有找到一丝归属感，还是你在跟朋友们一起吃饭开心地笑着的时候闪过一丝落寞。...</span><a#}
+        {#                        href="/" class="readmore">阅读原文</a></li>#}
+        {#                <li>#}
+        {#                    <div class="tpic"><img src="images/b05.jpg"></div>#}
+        {#                    <b>美丽的茧</b><span>让世界拥有它的脚步，让我保有我的茧。当溃烂已极的心灵再不想做一丝一毫的思索时，就让我静静回到我的茧内，以回忆为睡榻，以悲哀为覆被，这是我唯一的美丽。...</span><a#}
+        {#                        href="/" class="readmore">阅读原文</a></li>#}
+        {#                <li>#}
+        {#                    <div class="tpic"><img src="images/b01.png"></div>#}
+        {#                    <b>6条网页设计配色原则,让你秒变配色高手</b><span>网页设计好不好看,颜色是毋庸置疑要排首位的,所以关于颜色的搭配技巧以及原则,对于每一个要学习web前端设计的新手来说,这都是一个重要的学习过程.在本教程中我们将与你分享...</span><a#}
+        {#                        href="/" class="readmore">阅读原文</a></li>#}
+        {#            </ul>#}
+        {#        </div>#}
+        <div class="newblogs">
+            <h2 class="hometitle">最新文章</h2>
+            {% if  post_list %}
+                <ul id="list">
+                    {% for post in  post_list %}
+                        <li>
+                            <h3 class="blogtitle"><a href="{% url "blog:detail" post.id %}"
+                                                     target="_blank">{{ post.title }}</a></h3>
+                            <div class="bloginfo">
+                                <span class="blogpic"><a href="/" title=""><img
+                                        src="../../../media/{{ post.imgUrl }}"/></a></span>
+                                <p>{{ post.excerpt }}</p>
+                            </div>
+                            <div class="autor"><span class="lm f_l"><a
+                                    href="{% url "blog:tag" post.tags.id %}">{{ post.tags.name }}</a></span><span
+                                    class="dtime f_l">{{ post.created_time.year }}-{{ post.created_time.month }}-{{ post.created_time.day }}</span><span
+                                    class="viewnum f_l">浏览（<a href="#">{{ post.views }}</a>）</span>
+                                {#                                <span class="pingl f_l">喜欢（<a href="/">30</a>）</span>#}
+                                <span class="f_r"><a
+                                        href="{% url "blog:detail" post.id %}"
+                                        class="more">阅读原文</a></span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <h2>没有文章！</h2>
+            {% endif %}
+            {#            <ul id="list2">#}
+            {#            </ul>#}
+            <script src="{% static "blog/js/page2.js" %}"></script>
+            <div class="pagelist"><a title="Total record">&nbsp;<b>{{ sum_num }}</b> </a>&nbsp;&nbsp
+                <a href="{% url "blog:page" 1 %}">首页</a>
+                {% if  previous_page != 0 %}
+                    <a href="{% url "blog:page" previous_page %}">上一页</a>
+                {% endif %}
+                &nbsp<a href="#">第 {{ current_page }} 页 / 共 {{ paginator.num_pages }} 页</a>&nbsp
+                {% if  current_page != paginator.num_pages %}
+                    <a href="{% url "blog:page" next_page %}">下一页</a>
+                {% endif %}
+                <a href="{% url "blog:page" paginator.num_pages %}">尾页</a>
+            </div>
+        </div>
+    </div>
+    <div class="rightbox">
+        <div class="aboutme">
+            <h2 class="ab_title">关于我</h2>
+            {#            <div class="avatar"><img src="images/b04.jpg"/></div>#}
+            <div class="ab_con">
+                <p>名称：jessewu233</p>
+                <p>职业：产品经理 </p>
+                <p>地址：福建省厦门市</p>
+                <p>邮箱：jessewu888@163.com</p>
+            </div>
+        </div>
+        <div class="blank"></div>
+        {#        <div class="search">#}
+        {#            <form action="/e/search/index.php" method="post" name="searchform" id="searchform">#}
+        {#                <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字"#}
+        {#                       style="color: rgb(153, 153, 153);"#}
+        {#                       onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"#}
+        {#                       onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">#}
+        {#                <input name="show" value="title" type="hidden">#}
+        {#                <input name="tempid" value="1" type="hidden">#}
+        {#                <input name="tbname" value="news" type="hidden">#}
+        {#                <input name="Submit" class="input_submit" value="搜索" type="submit">#}
+        {#            </form>#}
+        {#        </div>#}
+        <div class="paihang">
+            <h2 class="ab_title"><a href="{% url "blog:top" %}">阅读排行</a></h2>
+            {% if most_view_list %}
+                <ul>
+                    {% for post in most_view_list %}
+                        <li><b><a href="{% url "blog:detail" post.id %}" target="_blank">{{ post.title }}</a></b>
+                            <p>{{ post.excerpt | truncatechars:40 }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {#            <div class="ad"><img src="images/ad01.jpg"></div>#}
+        </div>
+        {#        <div class="links">#}
+        {#            <h2 class="ab_title">友情链接</h2>#}
+        {#            <ul>#}
+        {#                <li><a href="/">杨青个人博客</a></li>#}
+        {#                <li><a href="/">个人博客模板</a></li>#}
+        {#                <li><a href="/">优秀个人博客</a></li>#}
+        {#            </ul>#}
+        {#        </div>#}
+        {#        <div class="weixin">#}
+        {#            <h2 class="ab_title">微信关注</h2>#}
+        {#            <ul>#}
+        {#                <img src="images/wx.jpg">#}
+        {#            </ul>#}
+        {#        </div>#}
+    </div>
+</article>
+<footer>
+    <p>Made by <a href="/">jessewu233</a> <a href="/">闽ICP备18019460号-1</a></p>
+</footer>
+</body>
+</html>

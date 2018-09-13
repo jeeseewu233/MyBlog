@@ -1,0 +1,150 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>五先生笔记</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static "blog/css/base.css" %}" rel="stylesheet">
+    <link href="{% static "blog/css/index.css" %}" rel="stylesheet">
+    <link href="{% static "blog/css/m.css" %}" rel="stylesheet">
+    <!--[if lt IE 9]>
+<script src="{% static "blog/js/modernizr.js" %}"></script>
+<![endif]-->
+</head>
+<body>
+<header>
+    <div id="mnav">
+        <div class="logo"><a href="/">五先生笔记</a></div>
+        <h2 id="mnavh"><span class="navicon"></span></h2>
+        <ul id="starlist">
+            <li><a href="http://localhost:8000/">首页</a></li>
+            <li><a href="{% url "blog:category" 6 %}">PM之路</a></li>
+            <li><a href="{% url "blog:category" 7 %}">Python啦</a></li>
+            <li><a href="{% url "blog:category" 8 %}">数据分析</a></li>
+            <li><a href="{% url "blog:category" 9 %}">技术杂烩</a></li>
+            <li><a href="{% url "blog:category" 9 %}">七七八八</a></li>
+        </ul>
+    </div>
+    <script>
+        window.onload = function () {
+            var oH2 = document.getElementById("mnavh");
+            var oUl = document.getElementById("starlist");
+            oH2.onclick = function () {
+                var style = oUl.style;
+                style.display = style.display == "block" ? "none" : "block";
+                oH2.className = style.display == "block" ? "open" : ""
+            }
+        }
+    </script>
+</header>
+<div class="line46"></div>
+<article>
+    <div style="margin-top: 20px" class="leftbox">
+        <div class="newblogs">
+            <h2 class="hometitle">
+                {% if tag_list %}
+                    <span>
+                    {% for tag in tag_list %}
+                        <a href="{% url "blog:tag" tag.id %}">{{ tag.name }}</a>
+                    {% endfor %}
+                    </span>
+                {% endif %}
+                {{ bigTitle }}</h2>
+            {% if post_list %}
+                <ul>
+                    {% for post in post_list %}
+                        <li>
+                            <h3 class="blogtitle"><a href="{% url "blog:detail" post.id %}"
+                                                     target="_blank">{{ post.title }}</a></h3>
+                            <div class="bloginfo"><span class="blogpic"><a href="/" title=""><img
+                                    src="../../../media/{{ post.imgUrl }}"/></a></span>
+                                <p>{{ post.excerpt }}</p>
+                            </div>
+                            <div class="autor"><span class="lm f_l"><a
+                                    href="{% url "blog:tag" post.tags.id %}">{{ post.tags }}</a></span><span
+                                    class="dtime f_l">{{ post.created_time.year }}-{{ post.created_time.month }}-{{ post.created_time.day }}</span><span
+                                    class="viewnum f_l">浏览（<a href="/">{{ post.views }}</a>）</span>
+                                {#                                <span class="pingl f_l">评论（<a href="/">30</a>）</span>#}
+                                <span class="f_r"><a href="{% url "blog:detail" post.id %}"
+                                                     class="more">阅读原文>></a></span>
+                            </div>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            {% endif %}
+
+            <div class="pagelist"><a title="Total record">&nbsp;<b>{{ sum_num }}</b> </a>&nbsp;&nbsp
+                <a href="{% url "blog:top_page" 1 %}">首页</a>
+                {% if  previous_page != 0 %}
+                    <a href="{% url "blog:top_page" previous_page %}">上一页</a>
+                {% endif %}
+                &nbsp<a href="#">第 {{ current_page }} 页 / 共 {{ paginator.num_pages }} 页</a>&nbsp
+                {% if  current_page != paginator.num_pages %}
+                    <a href="{% url "blog:top_page" next_page %}">下一页</a>
+                {% endif %}
+                <a href="{% url "blog:top_page" paginator.num_pages %}">尾页</a>
+            </div>
+        </div>
+    </div>
+    <div class="rightbox">
+        <div class="blank"></div>
+        <div class="aboutme">
+            <h2 class="ab_title">关于我</h2>
+            {#            <div class="avatar"><img src="images/b04.jpg"/></div>#}
+            <div class="ab_con">
+                <p>名称：jessewu233</p>
+                <p>职业：产品经理 </p>
+                <p>地址：福建省厦门市</p>
+                <p>邮箱：jessewu888@163.com</p>
+            </div>
+        </div>
+        {#        <div class="search">#}
+        {#            <form action="/e/search/index.php" method="post" name="searchform" id="searchform">#}
+        {#                <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字"#}
+        {#                       style="color: rgb(153, 153, 153);"#}
+        {#                       onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}"#}
+        {#                       onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">#}
+        {#                <input name="show" value="title" type="hidden">#}
+        {#                <input name="tempid" value="1" type="hidden">#}
+        {#                <input name="tbname" value="news" type="hidden">#}
+        {#                <input name="Submit" class="input_submit" value="搜索" type="submit">#}
+        {#            </form>#}
+        {#        </div>#}
+        {#        <div class="paihang">#}
+        {#            <h2 class="ab_title"><a href="/">本栏推荐</a></h2>#}
+        {#            <ul>#}
+        {#                <li><b><a href="/" target="_blank">住在手机里的朋友</a></b>#}
+        {#                    <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门无学...</p>#}
+        {#                </li>#}
+        {#                <li><b><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></b>#}
+        {#                    <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门...</p>#}
+        {#                </li>#}
+        {#                <li><b><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码</a></b>#}
+        {#                    <p>.先前发表过一篇文章《如果要学习web前端开发，需要学习什么？》</p>#}
+        {#                </li>#}
+        {#                <li><b><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></b>#}
+        {#                    <p>对于刚毕业的学生来说，.需要学习什么？》</p>#}
+        {#                </li>#}
+        {#                <li><b><a href="/" target="_blank">你面对的是生活而不是手机</a></b>#}
+        {#                    <p>.最简单的入门无非就是学会html和css，先前发表过一篇文章...</p>#}
+        {#                </li>#}
+        {#            </ul>#}
+        {#            <div class="ad"><img src="images/ad300x100.jpg"></div>#}
+        {#        </div>#}
+        {#        <div class="weixin">#}
+        {#            <h2 class="ab_title">微信关注</h2>#}
+        {#            <ul>#}
+        {#                <img src="{% static "blog/images/wx.jpg" %}">#}
+        {#            </ul>#}
+        {#        </div>#}
+    </div>
+</article>
+<footer>
+    <p>Made by <a href="/">jessewu233</a> <a href="/">闽ICP备18019460号-1</a></p>
+</footer>
+</body>
+</html>
