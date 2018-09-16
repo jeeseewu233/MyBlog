@@ -19,15 +19,15 @@
 <body>
 <header>
     <div id="mnav">
-        <div class="logo"><a href="/">五先生笔记</a></div>
+        <div class="logo"><a href="http://www.jessewu.cn/">五先生笔记</a></div>
         <h2 id="mnavh"><span class="navicon"></span></h2>
         <ul id="starlist">
-            <li><a href="http://localhost:8000/">首页</a></li>
+            <li><a href="http://www.jessewu.cn/">首页</a></li>
             <li><a href="{% url "blog:category" 6 %}">PM之路</a></li>
             <li><a href="{% url "blog:category" 7 %}">Python啦</a></li>
             <li><a href="{% url "blog:category" 8 %}">数据分析</a></li>
             <li><a href="{% url "blog:category" 9 %}">技术杂烩</a></li>
-            <li><a href="{% url "blog:category" 9 %}">七七八八</a></li>
+            <li><a href="{% url "blog:category" 10 %}">七七八八</a></li>
         </ul>
     </div>
     <script>
@@ -126,42 +126,44 @@
         {#        </div>#}
         <div class="news_pl">
             <h2>文章评论</h2>
-            <!--PC和WAP自适应版-->
-            <div id="SOHUCS" sid="{{ post.id }}"></div>
-            <script type="text/javascript">
-                (function () {
-                    var appid = 'cytOzNlIK';
-                    var conf = 'prod_47c0e44293180eae0a9562fc65506c4a';
-                    var width = window.innerWidth || document.documentElement.clientWidth;
-                    if (width < 960) {
-                        window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
-                    } else {
-                        var loadJs = function (d, a) {
-                            var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
-                            var b = document.createElement("script");
-                            b.setAttribute("type", "text/javascript");
-                            b.setAttribute("charset", "UTF-8");
-                            b.setAttribute("src", d);
-                            if (typeof a === "function") {
-                                if (window.attachEvent) {
-                                    b.onreadystatechange = function () {
-                                        var e = b.readyState;
-                                        if (e === "loaded" || e === "complete") {
-                                            b.onreadystatechange = null;
-                                            a()
+            <ul>
+                <!--PC和WAP自适应版-->
+                <div id="SOHUCS" sid="{{ post.id }}"></div>
+                <script type="text/javascript">
+                    (function () {
+                        var appid = 'cytOzNlIK';
+                        var conf = 'prod_47c0e44293180eae0a9562fc65506c4a';
+                        var width = window.innerWidth || document.documentElement.clientWidth;
+                        if (width < 960) {
+                            window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>');
+                        } else {
+                            var loadJs = function (d, a) {
+                                var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
+                                var b = document.createElement("script");
+                                b.setAttribute("type", "text/javascript");
+                                b.setAttribute("charset", "UTF-8");
+                                b.setAttribute("src", d);
+                                if (typeof a === "function") {
+                                    if (window.attachEvent) {
+                                        b.onreadystatechange = function () {
+                                            var e = b.readyState;
+                                            if (e === "loaded" || e === "complete") {
+                                                b.onreadystatechange = null;
+                                                a()
+                                            }
                                         }
+                                    } else {
+                                        b.onload = a
                                     }
-                                } else {
-                                    b.onload = a
                                 }
-                            }
-                            c.appendChild(b)
-                        };
-                        loadJs("http://changyan.sohu.com/upload/changyan.js", function () {
-                            window.changyan.api.config({appid: appid, conf: conf})
-                        });
-                    }
-                })(); </script>
+                                c.appendChild(b)
+                            };
+                            loadJs("http://changyan.sohu.com/upload/changyan.js", function () {
+                                window.changyan.api.config({appid: appid, conf: conf})
+                            });
+                        }
+                    })(); </script>
+            </ul>
         </div>
     </div>
     <div class="rightbox">

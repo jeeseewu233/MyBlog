@@ -18,15 +18,15 @@
 <body>
 <header>
     <div id="mnav">
-        <div class="logo"><a href="/">五先生笔记</a></div>
+        <div class="logo"><a href="http://www.jessewu.cn/">五先生笔记</a></div>
         <h2 id="mnavh"><span class="navicon"></span></h2>
         <ul id="starlist">
-            <li><a href="http://localhost:8000/">首页</a></li>
+            <li><a href="http://www.jessewu.cn/">首页</a></li>
             <li><a href="{% url "blog:category" 6 %}">PM之路</a></li>
             <li><a href="{% url "blog:category" 7 %}">Python啦</a></li>
             <li><a href="{% url "blog:category" 8 %}">数据分析</a></li>
             <li><a href="{% url "blog:category" 9 %}">技术杂烩</a></li>
-            <li><a href="{% url "blog:category" 9 %}">七七八八</a></li>
+            <li><a href="{% url "blog:category" 10 %}">七七八八</a></li>
         </ul>
     </div>
     <script>
@@ -48,7 +48,7 @@
             <ul>
                 {% for top_post in top_post_list %}
                     <li><i><a href="{{ top_post.target }}"><img
-                            src="../../../media/{{ top_post.imgUrl }}"></a></i><span>{{ top_post.title }}</span></li>
+                            src="/media/{{ top_post.imgUrl }}"></a></i><span>{{ top_post.title }}</span></li>
                 {% endfor %}
             </ul>
         {% endif %}
