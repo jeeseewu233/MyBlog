@@ -103,7 +103,7 @@
                             <h3 class="blogtitle"><a href="{% url "blog:detail" post.id %}"
                                                      target="_blank">{{ post.title }}</a></h3>
                             <div class="bloginfo">
-                                <span class="blogpic"><a href="/" title=""><img
+                                <span class="blogpic"><a href="{% url "blog:detail" post.id %}" title=""><img
                                         src="../../../media/{{ post.imgUrl }}"/></a></span>
                                 <p>{{ post.excerpt }}</p>
                             </div>
